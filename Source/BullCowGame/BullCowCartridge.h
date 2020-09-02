@@ -1,3 +1,4 @@
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
@@ -9,15 +10,14 @@
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-	public:
-	virtual void BeginPlay() override;
-	virtual void OnInput(const FString& Input) override;
-	void SetUpGame();
+    public:
+    virtual void BeginPlay() override;
+    virtual void OnInput(const FString& Input) override;
 
-	// Your declarations go below!
-	private:
-	FString HiddenWord;
-	int32 Lives;
+    // Your declarations go below!
+    private:
+    int32 computer;
+    
 };
