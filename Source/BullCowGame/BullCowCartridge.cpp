@@ -9,21 +9,20 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+
+    SetupGame();
+
+
+
+    PrintLine(TEXT("The HiddenWord is: %s"),*HiddenWord); //Debug line
+
+    //Welcoming The Player
     PrintLine(TEXT("Welcome to Bull Cows! "));
-    PrintLine(TEXT("Press enter to continue..."));
-    FString roc = "1) Rock\n";
-    FString pap = "2) Paper\n";
-    FString sci = "3) Scissors\n";
-    
-    PrintLine(TEXT("====================\n"));
-    PrintLine(TEXT("rock paper scissors!\n"));
-    PrintLine(TEXT("====================\n"));
-    
-    PrintLine(roc);
-    PrintLine(pap);
-    PrintLine(sci);
-    
-    PrintLine(TEXT("Choose: "));
+    RockPaperScissors();
+    PrintLine(TEXT("Type is your choice and press enter to continue..."));
+
+
+
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -91,9 +90,28 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
         PrintLine(TEXT("Computer Wins!\n"));
        
     }
-    
-    
-    
 }
 
+void UBullCowCartridge::SetupGame() 
+{
+    HiddenWord = "cake";
+    Lives = 4;
+}
 
+void UBullCowCartridge::RockPaperScissors()
+{
+    FString roc = "1) Rock\n";
+    FString pap = "2) Paper\n";
+    FString sci = "3) Scissors\n";
+    
+    PrintLine(TEXT("====================\n"));
+    PrintLine(TEXT("rock paper scissors!\n"));
+    PrintLine(TEXT("====================\n"));
+    
+    PrintLine(roc);
+    PrintLine(pap);
+    PrintLine(sci);
+    
+    PrintLine(TEXT("Choose: "));
+
+}
