@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include<stdlib.h>
+
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
