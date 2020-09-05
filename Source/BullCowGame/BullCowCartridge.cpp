@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <ctime>
 
-int32 UBullCowCartridge::Lives=4;
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
@@ -18,6 +17,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
+    ClearScreen();
 
     srand(time(NULL));
 
@@ -71,35 +71,34 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     else if(user == 1 && computer == 3)
     {
         PrintLine(TEXT("You Win"));
-        ++Lives;
+        ++userWins;
     }
     else if(user == 3 && computer == 2)
     {
         PrintLine(TEXT("You Win"));
-        ++Lives;
+        ++userWins;
     }
     else if(user == 2 && computer == 1)
     {
         PrintLine(TEXT("You Win"));
-        ++Lives;
+        ++userWins;
     }
     else
     {
         PrintLine(TEXT("Computer Wins!"));
-        --Lives;
+        ++computerWins;
     }
 
-
-    if(Lives ==0 )
-        EndGame();
-    else
-        UserInput();
+     ShowOutput();
+     UserInput();
     
 }
 
 void UBullCowCartridge::SetupGame()
 {
     ClearScreen();
+    userWins = 0;
+    computerWins = 0;
     UserInput();
 }
 
@@ -120,9 +119,10 @@ void UBullCowCartridge::UserInput()
     PrintLine(TEXT("Choose: "));
 }
 
-void UBullCowCartridge::EndGame()
+void UBullCowCartridge::ShowOutput()
 {
-    PrintLine(TEXT("==========Game over=========="));
+    PrintLine(TEXT("Computer : You"));
+    PrintLine(TEXT("%i : %i"), computerWins, userWins);
     return;
 }
 
