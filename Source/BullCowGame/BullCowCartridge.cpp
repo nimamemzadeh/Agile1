@@ -3,40 +3,30 @@
 #include <cstdlib>
 #include <ctime>
 
-#include<stdlib.h>
-
+int32 UBullCowCartridge::Lives=4;
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
 
-    SetupGame();
-
-
-
-    PrintLine(TEXT("The HiddenWord is: %s"),*HiddenWord); //Debug line
 
     //Welcoming The Player
     PrintLine(TEXT("Welcome to Bull Cows! "));
-    RockPaperScissors();
-    PrintLine(TEXT("Type is your choice and press enter to continue..."));
-
-
+    SetupGame();
 
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
 
-    
     srand(time(NULL));
 
     int32 computer = rand() % 3 + 1;
 
     int32 user = 0;
-    FString roc = "1) Rock\n";
-    FString pap = "2) Paper\n";
-    FString sci = "3) Scissors\n";
+    FString roc = "Computer: Rock";
+    FString pap = "Computer: Paper";
+    FString sci = "Computer: Scissors";
     
     if (Input == "rock")
     {
@@ -46,17 +36,19 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     {
         user = 2;
     }
-    else if (Input == "Scissors")
+    else if (Input == "scissors")
     {
         user = 3;
     }
     else
     {
-        PrintLine("Wrong input");
+        PrintLine("Wrong input!");
+        return;
     }
 
     
-    switch(computer){
+    switch(computer)
+    {
     case 1 :
         PrintLine(roc);
         break;
@@ -72,46 +64,65 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     
     
     
-    if(user == computer){
-       PrintLine(TEXT("Draw Game\n"));
+    if(user == computer)
+    {
+        PrintLine(TEXT("Draw Game"));
     }
-    else if(user == 1 && computer == 3){
-        PrintLine(TEXT("You Win\n"));
-        
+    else if(user == 1 && computer == 3)
+    {
+        PrintLine(TEXT("You Win"));
+        ++Lives;
     }
-    else if(user == 3 && computer == 2){
-        PrintLine(TEXT("You Win\n"));
-        
+    else if(user == 3 && computer == 2)
+    {
+        PrintLine(TEXT("You Win"));
+        ++Lives;
     }
-    else if(user == 2 && computer == 1){
-      PrintLine(TEXT("You Win\n"));
+    else if(user == 2 && computer == 1)
+    {
+        PrintLine(TEXT("You Win"));
+        ++Lives;
     }
-    else{
-        PrintLine(TEXT("Computer Wins!\n"));
-       
+    else
+    {
+        PrintLine(TEXT("Computer Wins!"));
+        --Lives;
     }
-}
 
-void UBullCowCartridge::SetupGame() 
-{
-    HiddenWord = "cake";
-    Lives = 4;
-}
 
-void UBullCowCartridge::RockPaperScissors()
-{
-    FString roc = "1) Rock\n";
-    FString pap = "2) Paper\n";
-    FString sci = "3) Scissors\n";
+    if(Lives ==0 )
+        EndGame();
+    else
+        UserInput();
     
-    PrintLine(TEXT("====================\n"));
-    PrintLine(TEXT("rock paper scissors!\n"));
-    PrintLine(TEXT("====================\n"));
+}
+
+void UBullCowCartridge::SetupGame()
+{
+    ClearScreen();
+    UserInput();
+}
+
+void UBullCowCartridge::UserInput()
+{
+    FString roc = "1) Rock";
+    FString pap = "2) Paper";
+    FString sci = "3) Scissors";
+    
+    PrintLine(TEXT("===================="));
+    PrintLine(TEXT("rock paper scissors!"));
+    PrintLine(TEXT("===================="));
     
     PrintLine(roc);
     PrintLine(pap);
     PrintLine(sci);
     
     PrintLine(TEXT("Choose: "));
-
 }
+
+void UBullCowCartridge::EndGame()
+{
+    PrintLine(TEXT("==========Game over=========="));
+    return;
+}
+
