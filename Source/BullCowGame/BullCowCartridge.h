@@ -21,8 +21,6 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
     void UserInput();
     void ShowOutput();
     
-    UFUNCTION(BlueprintImplementableEvent)
-    int32 GetLives();
     
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TestCategory")
         int32 userWins = 0;
