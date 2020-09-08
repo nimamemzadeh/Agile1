@@ -126,3 +126,8 @@ void UBullCowCartridge::ShowOutput()
     return;
 }
 
+//UFUNCTION(BlueprintImplementableEvent)
+int32 UBullCowCartridge::GetLives()
+{
+    return userWins;
+}

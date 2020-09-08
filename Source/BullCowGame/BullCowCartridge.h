@@ -7,10 +7,9 @@
 #include "Console/Cartridge.h"
 #include "BullCowCartridge.generated.h"
 
-static int32 userWins;
-static int32 computerWins;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+
+UCLASS(Blueprintable)
 class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 {
     GENERATED_BODY()
@@ -21,6 +20,14 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
     void SetupGame();
     void UserInput();
     void ShowOutput();
+    
+    UFUNCTION(BlueprintImplementableEvent)
+    int32 GetLives();
+    
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TestCategory")
+        int32 userWins = 0;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "TestCategory")
+        int32 computerWins = 0;
 
     // Your declarations go below!
     private:
